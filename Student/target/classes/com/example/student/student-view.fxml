@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.student.StudentController" spacing="10" alignment="center">
+    <HBox spacing="10">
+        <TextField fx:id="idField" promptText="ID" />
+        <TextField fx:id="studentIdField" promptText="Student ID" />
+        <TextField fx:id="nameField" promptText="Name" />
+        <TextField fx:id="dobField" promptText="Date of Birth" />
+        <TextField fx:id="ageField" promptText="Age" />
+        <ComboBox fx:id="genderField" prefWidth="200.0" />
+
+        <TextField fx:id="scoreField" promptText="Score" />
+    </HBox>
+    <HBox spacing="10">
+        <Button text="Add Student" onAction="#addStudent" />
+        <Button text="Sort by Score" onAction="#sortStudents" />
+    </HBox>
+    <TableView fx:id="studentTable" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" />
+            <TableColumn fx:id="colStudentId" text="Student ID" />
+            <TableColumn fx:id="colName" text="Name" />
+            <TableColumn fx:id="colDob" text="Date of Birth" />
+            <TableColumn fx:id="colAge" text="Age" />
+            <TableColumn fx:id="colGender" text="Gender" />
+            <TableColumn fx:id="colScore" text="Score" />
+        </columns>
+    </TableView>
+</VBox>
