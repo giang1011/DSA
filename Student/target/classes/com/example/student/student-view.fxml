@@ -12,12 +12,13 @@
         <TextField fx:id="dobField" promptText="Date of Birth" />
         <TextField fx:id="ageField" promptText="Age" />
         <ComboBox fx:id="genderField" prefWidth="200.0" />
-
         <TextField fx:id="scoreField" promptText="Score" />
     </HBox>
     <HBox spacing="10">
         <Button text="Add Student" onAction="#addStudent" />
-        <Button text="Sort by Score" onAction="#sortStudents" />
+        <Button text="Bubble Sort" onAction="#sortStudentsWithBubbleSort" />
+        <Button text="Insertion Sort" onAction="#sortStudentsWithInsertionSort" />
+        <Button text="Selection Sort" onAction="#sortStudentsWithSelectionSort" />
     </HBox>
     <TableView fx:id="studentTable" prefHeight="200">
         <columns>

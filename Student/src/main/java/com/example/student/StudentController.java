@@ -40,7 +40,6 @@ public class StudentController {
         genderField.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
     }
 
-
     @FXML
     public void addStudent() {
         try {
@@ -51,7 +50,6 @@ public class StudentController {
             int age = Integer.parseInt(ageField.getText());
             String gender = genderField.getValue();
             double score = Double.parseDouble(scoreField.getText());
-
 
             if (score < 0 || score > 10) {
                 showAlert("Invalid Score", "Score must be between 0 and 10.");
@@ -67,10 +65,12 @@ public class StudentController {
         }
     }
 
-
-
     @FXML
-    public void sortStudents() {
+    public void sortStudentsWithBubbleSort() {
+        if (studentList.isEmpty()) {
+            showAlert("No Students", "The student list is empty. Cannot sort.");
+            return;
+        }
         for (int i = 0; i < studentList.size() - 1; i++) {
             for (int j = 0; j < studentList.size() - i - 1; j++) {
                 if (studentList.get(j).getScore() > studentList.get(j + 1).getScore()) {
@@ -83,6 +83,46 @@ public class StudentController {
         studentTable.refresh();
     }
 
+    @FXML
+    public void sortStudentsWithInsertionSort() {
+        if (studentList.isEmpty()) {
+            showAlert("No Students", "The student list is empty. Cannot sort.");
+            return;
+        }
+        for (int i = 1; i < studentList.size(); i++) {
+            Student key = studentList.get(i);
+            int j = i - 1;
+            while (j >= 0 && studentList.get(j).getScore() > key.getScore()) {
+                studentList.set(j + 1, studentList.get(j));
+                j--;
+            }
+            studentList.set(j + 1, key);
+        }
+        studentTable.refresh();
+    }
+
+    @FXML
+    public void sortStudentsWithSelectionSort() {
+        if (studentList.isEmpty()) {
+            showAlert("No Students", "The student list is empty. Cannot sort.");
+            return;
+        }
+        for (int i = 0; i < studentList.size() - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < studentList.size(); j++) {
+                if (studentList.get(j).getScore() < studentList.get(minIndex).getScore()) {
+                    minIndex = j;
+                }
+            }
+            if (minIndex != i) {
+                Student temp = studentList.get(i);
+                studentList.set(i, studentList.get(minIndex));
+                studentList.set(minIndex, temp);
+            }
+        }
+        studentTable.refresh();
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -90,7 +130,6 @@ public class StudentController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 
     private void clearFields() {
         idField.clear();
