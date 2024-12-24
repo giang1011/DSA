@@ -11,7 +11,7 @@ public class StudentController {
     private ComboBox<String> genderField;
 
     @FXML
-    private TextField idField, studentIdField, nameField, dobField, ageField, scoreField;
+    private TextField studentIdField, nameField, dobField, ageField, scoreField;
     @FXML
     private TableView<Student> studentTable;
     @FXML
@@ -24,6 +24,7 @@ public class StudentController {
     private TableColumn<Student, Double> colScore;
 
     private ObservableList<Student> studentList = FXCollections.observableArrayList();
+    private int nextId = 1;
 
     @FXML
     public void initialize() {
@@ -43,7 +44,8 @@ public class StudentController {
     @FXML
     public void addStudent() {
         try {
-            int id = Integer.parseInt(idField.getText());
+            // Sử dụng nextId làm ID tự động
+            int id = nextId++;
             String studentId = studentIdField.getText();
             String name = nameField.getText();
             String dob = dobField.getText();
@@ -61,7 +63,7 @@ public class StudentController {
 
             clearFields();
         } catch (NumberFormatException e) {
-            showAlert("Invalid Input", "Please enter valid numerical values for ID, Age, and Score.");
+            showAlert("Invalid Input", "Please enter valid numerical values for Age and Score.");
         }
     }
 
@@ -132,11 +134,11 @@ public class StudentController {
     }
 
     private void clearFields() {
-        idField.clear();
         studentIdField.clear();
         nameField.clear();
         dobField.clear();
         ageField.clear();
         scoreField.clear();
+        genderField.setValue(null);
     }
 }
